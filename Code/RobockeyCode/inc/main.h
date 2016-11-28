@@ -21,5 +21,7 @@
 #include "bbc_m_usb.h"
 #include "bbc_time.h"
 #include "bbc_definitions.h"
+#include "bbc_adc.h"
+#include "bbc_puck.h"
 
 #endif

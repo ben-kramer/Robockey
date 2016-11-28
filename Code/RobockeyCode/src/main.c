@@ -11,6 +11,10 @@ ISR(TIMER3_COMPA_vect) {
 	time_isr();
 }
 
+ISR(ADC_vect){
+    adc_isr();
+}
+
 /* Our wireless addresses are: 0x2C, 0x2D, 0x2E */
 unsigned int my_addr = 0x2C;
 
@@ -31,6 +35,8 @@ void init(){
 
 	init_time();
 
+	init_adc();
+
 	sei();
 }	   
 
@@ -44,6 +50,9 @@ int main(void)
 		if(wlss_get_message(&last_message)) {
 			//print_wlss_message(last_message);
 		}
+		
+		read_adc(0);
+		check_breakbeam();
 
 		if(get_millis() - last_toggle_ms > 500) {
 			m_red(TOGGLE);

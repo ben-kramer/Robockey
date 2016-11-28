@@ -16,7 +16,19 @@
  * ========================= WIRELESS COMMUNICATION ========================= *
  * ========================================================================== */
 
-#define WLSS_CHANNEL 	  1
-#define WLSS_PACKET_LEN   10
+#define WLSS_CHANNEL		1
+#define WLSS_PACKET_LEN		10
+
+/* ========================================================================== *
+ * =========================== ADC Conversion Pins ========================== *
+ * ========================================================================== */
+
+#define BREAKBEAM_ADC_THRESH	500
+#define ADC_MAX 1000
+#define ADC_MIN 0
+
+enum adc_pin_index {
+	F0, F1, F4, F5, F6, F7, D4, B4, B5
+};
 
 #endif
