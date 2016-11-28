@@ -12,9 +12,15 @@
 // 0 = Breakbeam reading
 // 1-8 = Search readings going clockwise where 1 is straight ahead
 int puck_ADC_values[9] = { 0 };
+int pin_index = 0;
 
+// Cycle through all pins, call read_adc on each
 void read_puck_values() {
-
+	read_adc(pin_index);
+	pin_index++;
+	if (pin_index > 8) {
+		pin_index = 0;
+	}
 }
 
 // Update the ADC array at the correct index
@@ -50,7 +56,7 @@ double calc_puck_direction() {
 		double unit_intensity = (double) (this_val - ADC_MIN) / (ADC_MAX - ADC_MIN);
 		intensity_sum += unit_intensity;
 		// Weighted average of the directions
-		direction_sum += unit_intensity * 45 * (i-1);
+		direction_sum += unit_intensity * (45.0 * (i-1));
 		i++;
 	}
 	return direction_sum / intensity_sum;

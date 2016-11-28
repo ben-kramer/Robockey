@@ -12,7 +12,7 @@
 #include "m_general.h"
 #include "bbc_definitions.h"
 
-// 
+// Read each IR value into the array
 void read_puck_values();
 
 // Given an ADC value, record it to persistent array of values

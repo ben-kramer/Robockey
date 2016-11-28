@@ -50,9 +50,9 @@ int main(void)
 		if(wlss_get_message(&last_message)) {
 			//print_wlss_message(last_message);
 		}
-		
-		read_adc(0);
-		check_breakbeam();
+
+		read_puck_values();
+		calc_puck_direction();
 
 		if(get_millis() - last_toggle_ms > 500) {
 			m_red(TOGGLE);
