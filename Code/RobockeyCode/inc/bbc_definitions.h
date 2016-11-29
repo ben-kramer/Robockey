@@ -24,8 +24,8 @@
  * ========================================================================== */
 
 #define BREAKBEAM_ADC_THRESH	500
-#define ADC_MAX 1000
-#define ADC_MIN 0
+#define ADC_MAX 1024.0
+#define ADC_MIN 0.0
 
 enum adc_pin_index {
 	F0, F1, F4, F5, F6, F7, D4, B4, B5

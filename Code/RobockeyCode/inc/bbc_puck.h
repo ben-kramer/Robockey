@@ -22,6 +22,6 @@ void record_puck_adc(int index, int adc_val);
 int check_breakbeam();
 
 // Take all ADC values and calculate current puck position
-double calc_puck_direction();
+float calc_puck_direction();
 
 #endif

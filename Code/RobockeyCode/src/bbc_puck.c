@@ -32,10 +32,8 @@ void record_puck_adc(int index, int adc_val) {
 // Returns 1 if the robot is in possession of the puck, 0 if not
 int check_breakbeam() {
 	if (puck_ADC_values[0] > BREAKBEAM_ADC_THRESH) {
-		m_green(ON);
 		return 1;
 	} else {
-		m_green(OFF);
 		return 0;
 	}
 }
@@ -44,20 +42,52 @@ int check_breakbeam() {
 // with respect to the direction vector of the robot.
 // Returns angle in degrees
 // 0 degrees is straight ahead, 90 is to the right of the robot
-double calc_puck_direction() {
-	double direction_sum = 0;
-	double intensity_sum = 0;
+float calc_puck_direction() {
+	float direction_sum = 0;
+	float intensity_sum = 0;
 	// Check each sensor reading
 	int i = 1;
+	int min_val = 1024;
+	int min_val_index = 0;
+
 	while (i < 9) {
-		int this_val = puck_ADC_values[i]; // Sanitize the ADC value
-		// Normalize the reading compared to known min and max ADC values
-		// This will give a decimal from 0 to 1
-		double unit_intensity = (double) (this_val - ADC_MIN) / (ADC_MAX - ADC_MIN);
-		intensity_sum += unit_intensity;
-		// Weighted average of the directions
-		direction_sum += unit_intensity * (45.0 * (i-1));
+
+		if (puck_ADC_values[i] < min_val) {
+			min_val = puck_ADC_values[i];
+			min_val_index = i;
+		}
 		i++;
 	}
-	return direction_sum / intensity_sum;
+
+	int j = min_val_index;
+	int k = 1;
+	while (j < 9) {
+		int this_val = puck_ADC_values[j]; // Sanitize the ADC value
+		// Normalize the reading compared to known min and max ADC values
+		// This will give a decimal from 0 to 1
+		float unit_intensity = (this_val - ADC_MIN) / (ADC_MAX - ADC_MIN);
+		intensity_sum += unit_intensity;
+		// Weighted average of the directions
+		direction_sum += unit_intensity * (-180 + (45.0 * (k - 1)));
+		j++;
+		k++;
+	}
+
+	j = 1;
+	while (j < min_val_index) {
+		int this_val = puck_ADC_values[j]; // Sanitize the ADC value
+		// Normalize the reading compared to known min and max ADC values
+		// This will give a decimal from 0 to 1
+		float unit_intensity = (double) (this_val - ADC_MIN) / (ADC_MAX - ADC_MIN);
+		intensity_sum += unit_intensity;
+		// Weighted average of the directions
+		direction_sum += unit_intensity * (-180 + (45.0 * (k - 1)));
+		j++;
+		k++;
+	}
+    // printf("%f\n", direction_sum);
+    // printf("%f\n", intensity_sum);
+	float deg_from_min =  (direction_sum / intensity_sum) + 180;
+	float deg_from_abs = deg_from_min + (45 * (min_val_index - 1));
+	return deg_from_abs;
 }
