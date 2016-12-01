@@ -43,6 +43,9 @@ int check_breakbeam() {
 // Returns angle in degrees
 // 0 degrees is straight ahead, 90 is to the right of the robot
 float calc_puck_direction() {
+	if (puck_ADC_values[1] > STRAIGHT_IR_THRESH) {
+		return 0.0;
+	}
 	float direction_sum = 0;
 	float intensity_sum = 0;
 	// Check each sensor reading
@@ -51,7 +54,8 @@ float calc_puck_direction() {
 	int min_val_index = 0;
 
 	while (i < 9) {
-
+		// Find the minimum ADC value and index.
+		// This will be used as the temporary zero-position
 		if (puck_ADC_values[i] < min_val) {
 			min_val = puck_ADC_values[i];
 			min_val_index = i;
@@ -59,6 +63,7 @@ float calc_puck_direction() {
 		i++;
 	}
 
+	// Start at the min, call its angle 0
 	int j = min_val_index;
 	int k = 1;
 	while (j < 9) {
@@ -78,16 +83,15 @@ float calc_puck_direction() {
 		int this_val = puck_ADC_values[j]; // Sanitize the ADC value
 		// Normalize the reading compared to known min and max ADC values
 		// This will give a decimal from 0 to 1
-		float unit_intensity = (double) (this_val - ADC_MIN) / (ADC_MAX - ADC_MIN);
+		float unit_intensity = (this_val - ADC_MIN) / (ADC_MAX - ADC_MIN);
 		intensity_sum += unit_intensity;
 		// Weighted average of the directions
 		direction_sum += unit_intensity * (-180 + (45.0 * (k - 1)));
 		j++;
 		k++;
 	}
-    // printf("%f\n", direction_sum);
-    // printf("%f\n", intensity_sum);
+	
 	float deg_from_min =  (direction_sum / intensity_sum) + 180;
-	float deg_from_abs = deg_from_min + (45 * (min_val_index - 1));
+	float deg_from_abs = deg_from_min + (45 * (min_val_index - 1)); // Convert back to absolute zero
 	return deg_from_abs;
 }

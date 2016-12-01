@@ -11,6 +11,7 @@
 
 /* Uncomment this to see debug information */
 #define DEBUG_USB
+#define PI 					3.14159265
 
 /* ========================================================================== *
  * ========================= WIRELESS COMMUNICATION ========================= *
@@ -24,6 +25,7 @@
  * ========================================================================== */
 
 #define BREAKBEAM_ADC_THRESH	500
+#define STRAIGHT_IR_THRESH		800
 #define ADC_MAX 1024.0
 #define ADC_MIN 0.0
 

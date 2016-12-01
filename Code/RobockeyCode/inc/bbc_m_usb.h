@@ -21,4 +21,6 @@ void init_usb();
 
 void print_wlss_message(WirelessMessage m);
 
+void print_puck_angle();
+
 #endif
