@@ -15,10 +15,11 @@ typedef struct current {
 	float phi;
 };
 
-typedef struct const_center {
+typedef struct constellation {
 	float xCent;
 	float yCent;
 	float th;
+	float scale;
 };
 
 int calc_dist(int x2, int x1, int y2, int y1);
@@ -27,10 +28,10 @@ int min_ind(int array[6]);
 
 int max_ind(int array[6]);
 
-void three_stars();
+constellation three_stars(int x_vals[3], int y_vals[3]);
 
-current localize(mWiiReading mWiiData);
+constellation four_stars(int x_vals[4], int y_vals[4]);
 
-const_center calculate_center(mWiiReading data);
+current localize();
 
 #endif
