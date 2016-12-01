@@ -6,8 +6,8 @@
  * Localization code
  */
 
-// #include <math>
-// #include "bbc_localize.h"
+#include <math.h>
+#include "bbc_localize.h"
 
 int xblob[4] = {837, 880, 919, 861};
 int yblob[4] = {444, 412, 440, 509};
@@ -16,31 +16,29 @@ int valid[4] = {1, 1, 0, 1};
 int starA, starB, starC, starD;
 int xA, yA, xB, yB, xC, yC, xD, yD, xCenter, yCenter, theta;
 
+struct constellation current_constellation;
+
 int known_dist[6] = {13, 26, 20, 16, 29, 23};
 // 	wrt 1-2			100 200 154 123 223 177
 //  wrt 3-4			65	130	100	80	145 115
 
-/*
-					starA
-
-								starC
-		starD
-
-
-
-
-
-					starC
-
-
-*/	
+// Initialize fallback values if can't determine constellation
+void init_localize() {
+	current_constellation.xCent = 1000.0;
+	current_constellation.yCent = 1000.0;
+	current_constellation.theta = 0.0;
+	current_constellation.scale = 0.0;
+}
 
 // Determine the pixel center values of the constellation
 // as well as the constellations rotation.
 // theta is defined as counterclockwise rotation from "vertical" 
 // (like on the assignment)
 // Different logic for whether there are 3 or 4 stars
-constellation three_stars(int x_vals[3], int y_vals[3]) {
+struct constellation three_stars(int x_vals[3], int y_vals[3]) {
+	struct constellation out;
+	out = current_constellation;
+
 	// Calculate pixel distances between stars
 	int D12 = calc_dist(x_vals[1], x_vals[0], y_vals[1], y_vals[0]);
 	int D23 = calc_dist(x_vals[2], x_vals[1], y_vals[2], y_vals[1]);
@@ -150,19 +148,21 @@ constellation three_stars(int x_vals[3], int y_vals[3]) {
 		xCenter = (xA + xC)/2;
 		yCenter = (yA + yC)/2;
 	} else {
-		return 0;
+		return out;
 	}
 	// return struct
-	constellation out;
 	out.xCent = xCenter;
 	out.yCent = yCenter;
-	out.th = theta;
+	out.theta = theta;
 	// Scale is cm / pixel, using known distance
 	out.scale = 29.0/calc_dist(xC, xA, yC, yA);
 	return out;
 }
 
-constellation four_stars(int x_vals[4], int y_vals[4]) {
+struct constellation four_stars(int x_vals[4], int y_vals[4]) {
+	struct constellation out;
+	out = current_constellation;
+
 	// Calculate distance values
 	int D12 = calc_dist(x_vals[1], x_vals[0], y_vals[1], y_vals[0]);
 	int D23 = calc_dist(x_vals[2], x_vals[1], y_vals[2], y_vals[1]);
@@ -212,31 +212,32 @@ constellation four_stars(int x_vals[4], int y_vals[4]) {
 	float theta = (float)atan2((yA-yC), (xA-xC)) - PI/2;
 	if (theta < 0) {theta = theta + 2 * PI;}
 
-	constellation out;
-	out.xCent = xCenter;
-	out.yCent = yCenter;
-	out.th = theta;
+	out.xCent = xCent;
+	out.yCent = yCent;
+	out.theta = theta;
 	// Scale is cm / pixel, using known distance
 	out.scale = 29.0/calc_dist(xC, xA, yC, yA);
 	return out;
 }
 
 // Calculate current position and orientation
-current localize() {
+void localize() {
 	int valid_sum = valid[0] + valid[1] + valid[2] + valid[3];
-	int good_x[valid_sum];
-	int good_y[valid_sum];
+	int good_x[4];
+	int good_y[4];
+	int count = 0;
 	for (int i = 0; i < 4; ++i) {
 		if (valid[i]) {
-			good_x[i] = xblob[i];
-			good_y[i] = yblob[i];
+			good_x[count] = xblob[i];
+			good_y[count] = yblob[i];
+			count++;
 		}
 	}
-	constellation const_data;
+
 	if (valid_sum == 3) {
-		const_data = three_stars(good_x, good_y);
+		current_constellation = three_stars(good_x, good_y);
 	} else if (valid_sum == 4) {
-		const_data = four_stars(good_x, good_y);
+		current_constellation = four_stars(good_x, good_y);
 	}
 }
 

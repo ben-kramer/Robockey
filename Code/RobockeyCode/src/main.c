@@ -43,6 +43,8 @@ void init(){
 	init_wlss(my_addr);
 	init_time();
 	init_adc();
+	init_mwii();
+	init_localize();
 
 	sei();
 }	   
@@ -62,7 +64,7 @@ int main(void)
 		get_mwii_reading(last_mWii);
 
 		if (qualify) {
-	
+			
 			double goal_x = 115 * (1 - 2 * (x_pos > 0)); // Go to the goal on the opposite side
 			double goal_y = 0;
 			// Calculate the angle between the bot and the goal
