@@ -24,4 +24,6 @@
 #include "bbc_adc.h"
 #include "bbc_puck.h"
 
+void qualify_mode();
+
 #endif

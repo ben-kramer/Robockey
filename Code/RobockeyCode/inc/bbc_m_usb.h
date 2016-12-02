@@ -21,6 +21,10 @@ void init_usb();
 
 void print_wlss_message(WirelessMessage m);
 
-void print_puck_angle();
+void print_puck_angle(float angle);
+
+void print_mWii_data(mWiiReading m);
+
+void print_localize(struct constellation constel, struct loc_state current) 
 
 #endif

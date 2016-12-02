@@ -93,5 +93,7 @@ float calc_puck_direction() {
 	
 	float deg_from_min =  (direction_sum / intensity_sum) + 180;
 	float deg_from_abs = deg_from_min + (45 * (min_val_index - 1)); // Convert back to absolute zero
+
+	// print_puck_angle(deg_from_abs);
 	return deg_from_abs;
 }

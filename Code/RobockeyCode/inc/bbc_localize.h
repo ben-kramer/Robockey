@@ -25,10 +25,11 @@ struct constellation four_stars(int x_vals[4], int y_vals[4]);
 
 void localize();
 void init_localize();
+void update_blobs(mWiiReading *m);
 
-struct current {
-	float x_pos;
-	float y_pos;
+struct loc_state {
+	float x;
+	float y;
 	float phi;
 };
 

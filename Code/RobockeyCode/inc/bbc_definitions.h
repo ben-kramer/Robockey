@@ -13,6 +13,9 @@
 #define DEBUG_USB
 #define PI 					3.14159265
 
+#define CLOCK 16000000
+#define DELAY 1
+
 /* ========================================================================== *
  * ========================= WIRELESS COMMUNICATION ========================= *
  * ========================================================================== */
@@ -25,7 +28,8 @@
  * ========================================================================== */
 
 #define BREAKBEAM_ADC_THRESH	500
-#define STRAIGHT_IR_THRESH		800
+// If the front IR sensor is above this value, assume puck is at 0 degrees
+#define STRAIGHT_IR_THRESH		800 
 #define ADC_MAX 1024.0
 #define ADC_MIN 0.0
 

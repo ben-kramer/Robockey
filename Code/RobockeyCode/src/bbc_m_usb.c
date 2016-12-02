@@ -69,9 +69,47 @@ void print_wlss_message(WirelessMessage m) {
 #endif
 }
 
-void print_puck_angle() {
+void print_puck_angle(float angle) {
 #ifdef DEBUG_USB
-	float angle = calc_puck_direction();
 	m_usb_tx_uint((int)angle);
+#endif
+}
+
+void print_mWii_data(mWiiReading m) {
+#ifdef DEBUG_USB
+	for (int i = 0; i < 4; ++i) {
+		m_usb_tx_string("\n mWii x");
+		m_usb_tx_uint(i);
+		m_usb_tx_string(": ");
+		m_usb_tx_uint(m.data[i][0]);
+		m_usb_tx_string(" y");
+		m_usb_tx_uint(i);
+		m_usb_tx_string(": ");
+		m_usb_tx_uint(m.data[i][1]);
+		m_usb_tx_string(" v");
+		m_usb_tx_uint(i);
+		m_usb_tx_string(": ");
+		m_usb_tx_uint(m.valid[i]);
+	}
+#endif
+}
+
+void print_localize(struct constellation constel, struct loc_state current) {
+#ifdef DEBUG_USB
+	m_usb_tx_string("\n Const data: xC: ");
+	m_usb_tx_uint((int) constel.xCent);
+	m_usb_tx_string(" yC: ");
+	m_usb_tx_uint((int) constel.yCent);
+	m_usb_tx_string(" th: ");
+	m_usb_tx_uint((int) constel.theta);
+	m_usb_tx_string(" scale: ");
+	m_usb_tx_uint((int) constel.scale);
+	m_usb_tx_string("\n Current xPos: ");
+	m_usb_tx_uint((int) current.x);
+	m_usb_tx_string(" yPos: ");
+	m_usb_tx_uint((int) current.y);
+	m_usb_tx_string(" phi*100: ");
+	m_usb_tx_uint((int) (current.phi * 100.0));
+	
 #endif
 }

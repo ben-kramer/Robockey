@@ -36,4 +36,7 @@ void get_mwii_reading(mWiiReading *m) {
 			m->data[i][2] = s; 
 		}
 	}
+	// print_mWii_data(mWiiReading m);
+	update_blobs(mWiiReading m);
+	
 }
