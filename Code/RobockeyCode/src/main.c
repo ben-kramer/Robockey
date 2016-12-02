@@ -20,13 +20,11 @@ ISR(ADC_vect){
 /* Our wireless addresses are: 0x2C, 0x2D, 0x2E */
 unsigned int my_addr = 0x2C;
 
-struct loc_state current;
+/* Latest x y and phi data */
+loc_state current;
 
 /* The last message to come in */
 WirelessMessage last_message;
-
-/* Latest mWii data */
-mWiiReading last_mWii;
 
 /* Initialization functions */
 void init(){
@@ -60,9 +58,9 @@ int main(void)
 		}
 
 		// Fill the localize script with the latest mWii reading
-		get_mwii_reading(last_mWii);
-		// calculate bot localization state
-		struct current = localize();
+		get_mwii_reading();
+		// Calculate bot localization state
+		current = localize();
 
 		if (qualify) {qualify_mode();}
 
@@ -87,6 +85,6 @@ void qualify_mode() {
 		set_motor_speeds(0.8, 0.8);
 	} else {
 		int spindir = 1 - 2 * (delta_phi > 180);
-		set_motor_speeds(0.5 * spindir, -0.5 * spindir)
+		set_motor_speeds(0.5 * spindir, -0.5 * spindir);
 	}
 }

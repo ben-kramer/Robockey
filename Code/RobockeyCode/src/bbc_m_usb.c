@@ -7,6 +7,8 @@
  */
 
 #include "bbc_m_usb.h"
+#include "bbc_localize.h"
+#include "bbc_m_wii.h"
 
 void init_usb() {
 #ifdef DEBUG_USB
@@ -77,39 +79,39 @@ void print_puck_angle(float angle) {
 
 void print_mWii_data(mWiiReading m) {
 #ifdef DEBUG_USB
-	for (int i = 0; i < 4; ++i) {
+	int i;
+	for (i = 0; i < 4; ++i) {
 		m_usb_tx_string("\n mWii x");
-		m_usb_tx_uint(i);
+		m_usb_tx_int(i);
 		m_usb_tx_string(": ");
-		m_usb_tx_uint(m.data[i][0]);
+		m_usb_tx_int(m.data[i][0]);
 		m_usb_tx_string(" y");
-		m_usb_tx_uint(i);
+		m_usb_tx_int(i);
 		m_usb_tx_string(": ");
-		m_usb_tx_uint(m.data[i][1]);
+		m_usb_tx_int(m.data[i][1]);
 		m_usb_tx_string(" v");
-		m_usb_tx_uint(i);
+		m_usb_tx_int(i);
 		m_usb_tx_string(": ");
-		m_usb_tx_uint(m.valid[i]);
+		m_usb_tx_int(m.valid[i]);
 	}
 #endif
 }
 
-void print_localize(struct constellation constel, struct loc_state current) {
+void print_localize(constellation constel, loc_state current) {
 #ifdef DEBUG_USB
 	m_usb_tx_string("\n Const data: xC: ");
-	m_usb_tx_uint((int) constel.xCent);
+	m_usb_tx_int((int) constel.xCent);
 	m_usb_tx_string(" yC: ");
-	m_usb_tx_uint((int) constel.yCent);
+	m_usb_tx_int((int) constel.yCent);
 	m_usb_tx_string(" th: ");
-	m_usb_tx_uint((int) constel.theta);
+	m_usb_tx_int((int) (constel.theta * 100.0));
 	m_usb_tx_string(" scale: ");
-	m_usb_tx_uint((int) constel.scale);
+	m_usb_tx_int((int) (constel.scale * 100));
 	m_usb_tx_string("\n Current xPos: ");
-	m_usb_tx_uint((int) current.x);
+	m_usb_tx_int((int) current.x);
 	m_usb_tx_string(" yPos: ");
-	m_usb_tx_uint((int) current.y);
+	m_usb_tx_int((int) current.y);
 	m_usb_tx_string(" phi*100: ");
-	m_usb_tx_uint((int) (current.phi * 100.0));
-	
+	m_usb_tx_int((int) (current.phi * 100.0));
 #endif
 }

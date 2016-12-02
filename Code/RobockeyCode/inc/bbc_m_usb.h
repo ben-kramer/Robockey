@@ -14,6 +14,7 @@
 #include "bbc_definitions.h"
 #include "bbc_m_rf.h"
 #include "bbc_m_wii.h"
+#include "bbc_localize.h"
 
 /* Initializes usb. If usb initializes properly, the green and red 
  * leds blink once */
@@ -25,6 +26,6 @@ void print_puck_angle(float angle);
 
 void print_mWii_data(mWiiReading m);
 
-void print_localize(struct constellation constel, struct loc_state current) 
+void print_localize(constellation constel, loc_state current);
 
 #endif

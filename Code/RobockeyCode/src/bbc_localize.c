@@ -8,6 +8,7 @@
 
 #include <math.h>
 #include "bbc_localize.h"
+// #include "bbc_m_usb.h"
 
 // Example starting values, will be replaced on run
 int xblob[4] = {837, 880, 919, 861};
@@ -40,7 +41,8 @@ void init_localize() {
 
 // When we get a new mWii reading, fill the blob arrays
 void update_blobs(mWiiReading m) {
-	for (int i = 0; i < 4; ++i) {
+	int i;
+	for (i = 0; i < 4; ++i) {
 		xblob[i] = m.data[i][0];
 		yblob[i] = m.data[i][1];
 		valid[i] = m.valid[i];
@@ -53,8 +55,8 @@ void update_blobs(mWiiReading m) {
 // orientation shown online
 
 // Different logic for whether there are 3 or 4 stars
-struct constellation three_stars(int x_vals[3], int y_vals[3]) {
-	struct constellation out;
+constellation three_stars(int x_vals[3], int y_vals[3]) {
+	constellation out;
 	// Default to old data
 	out = current_constellation;
 
@@ -67,7 +69,8 @@ struct constellation three_stars(int x_vals[3], int y_vals[3]) {
 	int meas_ratio[3];
 	int min_dist = meas_dist[min_ind(meas_dist, 3)];
 	// Convert to ratios (distance / smallest distance)
-	for (int i = 0; i < 3; ++i) {
+	int i;
+	for (i = 0; i < 3; ++i) {
 		meas_ratio[i] = (1000*meas_dist[i]) / min_dist;
 	}
 
@@ -83,7 +86,7 @@ struct constellation three_stars(int x_vals[3], int y_vals[3]) {
 	if (ratio_sum > 4650) { // A-B-C
 		int ind12 = min_ind(meas_ratio, 3); // which ratio is stars 1-2 (smallest)
 		int ind13 = max_ind(meas_ratio, 3); // which ratio is stars 1-3 (largest)
-		int ind23 = 3 - ind12 - ind13;
+		// int ind23 = 3 - ind12 - ind13;
 
 		// If the order is 1-2, 1-3, 2-3, (based on how the star data came in) 
 		// then the first star is star B, the second is star A, and the third is starC
@@ -123,7 +126,7 @@ struct constellation three_stars(int x_vals[3], int y_vals[3]) {
 		// See above
 		int ind34 = min_ind(meas_ratio, 3);
 		int ind23 = max_ind(meas_ratio, 3);
-		int ind24 = 3 - ind34 - ind23;
+		// int ind24 = 3 - ind34 - ind23;
 
 		if (ind34 == 0) {
 			if (ind23 == 1) {
@@ -171,7 +174,7 @@ struct constellation three_stars(int x_vals[3], int y_vals[3]) {
 		// See above
 		int ind14 = min_ind(meas_ratio, 3);
 		int ind13 = max_ind(meas_ratio, 3);
-		int ind34 = 3 - ind14 - ind13;
+		// int ind34 = 3 - ind14 - ind13;
 
 		if (ind14 == 0) {
 			if (ind13 == 1) {
@@ -209,7 +212,7 @@ struct constellation three_stars(int x_vals[3], int y_vals[3]) {
 		// See above
 		int ind12 = min_ind(meas_ratio, 3);
 		int ind24 = max_ind(meas_ratio, 3);
-		int ind14 = 3 - ind12 - ind24;
+		// int ind14 = 3 - ind12 - ind24;
 
 		if (ind12 == 0) {
 			if (ind24 == 1) {
@@ -266,8 +269,8 @@ struct constellation three_stars(int x_vals[3], int y_vals[3]) {
 	return out;
 }
 
-struct constellation four_stars(int x_vals[4], int y_vals[4]) {
-	struct constellation out;
+constellation four_stars(int x_vals[4], int y_vals[4]) {
+	constellation out;
 	out = current_constellation;
 
 	// Calculate distance values
@@ -282,7 +285,8 @@ struct constellation four_stars(int x_vals[4], int y_vals[4]) {
 	int meas_ratio[6];
 	int min_dist = meas_dist[min_ind(meas_dist, 6)];
 	// Convert to ratios (distance / smallest distance)
-	for (int i = 0; i < 6; ++i) {
+	int i;
+	for (i = 0; i < 6; ++i) {
 		meas_ratio[i] = (1000*meas_dist[i]) / min_dist;
 	}
 
@@ -328,13 +332,14 @@ struct constellation four_stars(int x_vals[4], int y_vals[4]) {
 }
 
 // Calculate current position and orientation
-struct loc_state localize() {
+loc_state localize() {
 	// Determine which star values should be used in calculation
 	int valid_sum = valid[0] + valid[1] + valid[2] + valid[3];
 	int good_x[4];
 	int good_y[4];
 	int count = 0;
-	for (int i = 0; i < 4; ++i) {
+	int i;
+	for (i = 0; i < 4; ++i) {
 		if (valid[i]) {
 			good_x[count] = xblob[i];
 			good_y[count] = yblob[i];
@@ -347,9 +352,10 @@ struct loc_state localize() {
 	} else if (valid_sum == 4) {
 		current_constellation = four_stars(good_x, good_y);
 	}
+	print_localize(current_constellation, current);
 
 
-
+	return current;
 	// print_localize(struct constellation current_constellation, struct loc_state current);
 }
 
@@ -357,10 +363,12 @@ int calc_dist(int x2, int x1, int y2, int y1) {
 	return sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
 }
 
+// Find the index of the minimum value of an array
 int min_ind(int array[], int size) {
 	int min = array[0];
 	int ind = 0;
-	for (int i = 1; i < size; ++i) {
+	int i;
+	for (i = 1; i < size; ++i) {
 		if (array[i] < min) {
 			min = array[i];
 			ind = i;
@@ -368,10 +376,13 @@ int min_ind(int array[], int size) {
 	}
 	return ind;
 }
+
+// Find the index of the maximum value of an array
 int max_ind(int array[], int size) {
 	int max = array[0];
 	int ind = 0;
-	for (int i = 1; i < size; ++i) {
+	int i;
+	for (i = 1; i < size; ++i) {
 		if (array[i] > max) {
 			max = array[i];
 			ind = i;
