@@ -88,7 +88,7 @@ void print_mWii_data(mWiiReading m) {
 		m_usb_tx_string(" y");
 		m_usb_tx_int(i);
 		m_usb_tx_string(": ");
-		m_usb_tx_int(m.data[i][1]);
+		m_usb_tx_int(m.data[i][1]);	
 		m_usb_tx_string(" v");
 		m_usb_tx_int(i);
 		m_usb_tx_string(": ");
@@ -97,7 +97,7 @@ void print_mWii_data(mWiiReading m) {
 #endif
 }
 
-void print_localize(constellation constel, loc_state current) {
+void print_constellation(constellation constel) {
 #ifdef DEBUG_USB
 	m_usb_tx_string("\n Const data: xC: ");
 	m_usb_tx_int((int) constel.xCent);
@@ -107,6 +107,11 @@ void print_localize(constellation constel, loc_state current) {
 	m_usb_tx_int((int) (constel.theta * 100.0));
 	m_usb_tx_string(" scale: ");
 	m_usb_tx_int((int) (constel.scale * 100));
+#endif
+}
+
+void print_localize(loc_state current) {
+#ifdef DEBUG_USB
 	m_usb_tx_string("\n Current xPos: ");
 	m_usb_tx_int((int) current.x);
 	m_usb_tx_string(" yPos: ");

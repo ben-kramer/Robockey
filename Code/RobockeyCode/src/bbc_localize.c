@@ -21,7 +21,7 @@ float theta;
 
 // The two structs that hold current information
 struct constellation current_constellation;
-struct loc_state current;
+struct loc_state current_state;
 
 int known_dist[6] = {13, 26, 20, 16, 29, 23};
 // 	wrt 1-2			100 200 154 123 223 177
@@ -34,9 +34,9 @@ void init_localize() {
 	current_constellation.theta = 0.0;
 	current_constellation.scale = 0.0;
 
-	current.x = 0.0;
-	current.y = 0.0;
-	current.phi = 0.0;
+	current_state.x = 0.0;
+	current_state.y = 0.0;
+	current_state.phi = 0.0;
 }
 
 // When we get a new mWii reading, fill the blob arrays
@@ -352,11 +352,16 @@ loc_state localize() {
 	} else if (valid_sum == 4) {
 		current_constellation = four_stars(good_x, good_y);
 	}
-	print_localize(current_constellation, current);
+	// print_constellation(current_constellation, current_state);
 
+	int dx = -511 + current_constellation.xCent;
+	int dy = 383 - current_constellation.yCent;
 
-	return current;
-	// print_localize(struct constellation current_constellation, struct loc_state current);
+	current_state.x = current_constellation.scale*(cos(current_constellation.theta) * dx + sin(current_constellation.theta) * dy);
+	current_state.y = current_constellation.scale*(-sin(current_constellation.theta) * dx + cos(current_constellation.theta) * dy);
+	current_state.phi = -current_constellation.theta + PI;
+
+	return current_state;
 }
 
 int calc_dist(int x2, int x1, int y2, int y1) {

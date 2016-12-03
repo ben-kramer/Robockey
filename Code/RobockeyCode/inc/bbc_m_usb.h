@@ -26,6 +26,8 @@ void print_puck_angle(float angle);
 
 void print_mWii_data(mWiiReading m);
 
-void print_localize(constellation constel, loc_state current);
+void print_constellation(constellation constel);
+
+void print_localize(loc_state current);
 
 #endif

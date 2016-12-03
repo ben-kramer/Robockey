@@ -22,8 +22,8 @@ typedef struct loc_state {
 } loc_state;
 
 typedef struct constellation {
-	float xCent;
-	float yCent;
+	int xCent;
+	int yCent;
 	float theta;
 	float scale;
 } constellation;

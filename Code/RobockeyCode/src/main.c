@@ -61,6 +61,7 @@ int main(void)
 		get_mwii_reading();
 		// Calculate bot localization state
 		current = localize();
+		print_localize(current);
 
 		if (qualify) {qualify_mode();}
 
