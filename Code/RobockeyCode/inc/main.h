@@ -23,5 +23,9 @@
 #include "bbc_definitions.h"
 #include "bbc_adc.h"
 #include "bbc_puck.h"
+#include "bbc_localize.h"
+#include "bbc_drive.h"
+
+void qualify_mode();
 
 #endif

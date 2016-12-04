@@ -1,7 +1,7 @@
 #include "main.h"
 
 long last_toggle_ms = 0;
-int playmode = 0;
+int play_mode = 0;
 int qualify = 1;
 
 ISR(INT2_vect) {
@@ -20,15 +20,11 @@ ISR(ADC_vect){
 /* Our wireless addresses are: 0x2C, 0x2D, 0x2E */
 unsigned int my_addr = 0x2C;
 
-double x_pos = -100;
-double y_pos = 50;
-double phi = 0;
+/* Latest x y and phi data */
+loc_state current;
 
 /* The last message to come in */
 WirelessMessage last_message;
-
-/* Latest mWii data */
-mWiiReading last_mWii;
 
 /* Initialization functions */
 void init(){
@@ -58,28 +54,17 @@ int main(void)
 		/* Check for an incoming message. If one exists, print it */
 		if(wlss_get_message(&last_message)) {
 			// print_wlss_message(last_message);
-			playmode = (last_message.type == PLAY);
+			play_mode = (last_message.type == PLAY);
 		}
 
-		get_mwii_reading(last_mWii);
-
-		if (qualify) {
-			
-			double goal_x = 115 * (1 - 2 * (x_pos > 0)); // Go to the goal on the opposite side
-			double goal_y = 0;
-			// Calculate the angle between the bot and the goal
-			// 0 to 360
-			double phi_to_goal = 90 - 180 * atan2((goal_y - y_pos), (goal_x - x_pos)) / PI;
-			if (phi_to_goal < 0) {phi_to_goal = phi_to_goal + 360;}
-
-			double delta_phi = phi_to_goal - phi;
-			if (fabs(delta_phi) < 5) {
-				set_motor_speeds(0.8, 0.8);
-			} else {
-				int spindir = 1 - 2 * (delta_phi > 180);
-				set_motor_speeds(0.5 * spindir, -0.5 * spindir)
-			}
-		}
+		// Fill the localize script with the latest mWii reading
+		get_mwii_reading();
+		// Calculate bot localization state
+		current = localize();
+		// print_localize(current);
+		read_puck_values();
+		// calc_puck_direction();
+		if (qualify) {qualify_mode();}
 
 		if(get_millis() - last_toggle_ms > 500) {
 			m_red(TOGGLE);
@@ -87,4 +72,21 @@ int main(void)
 		}
 	}
 
+}
+
+void qualify_mode() {
+	double goal_x = 115 * (1 - 2 * (current.x > 0)); // Go to the goal on the opposite side
+	double goal_y = 0;
+	// Calculate the angle between the bot and the goal
+	// 0 to 360
+	double phi_to_goal = PI/2 - atan2((goal_y - current.y), (goal_x - current.x));
+	if (phi_to_goal < 0) {phi_to_goal = phi_to_goal + 2*PI;}
+
+	double delta_phi = phi_to_goal - current.phi;
+	if (fabs(delta_phi) < 0.08) {
+		set_motor_speeds(0.8, 0.8);
+	} else {
+		int spindir = 1 - 2 * (delta_phi > 180);
+		set_motor_speeds(0.5 * spindir, -0.5 * spindir);
+	}
 }

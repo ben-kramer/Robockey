@@ -27,6 +27,6 @@ typedef struct mWiiReading {
 void init_mwii();
 
 /* Gets mWii readings and fills the struct with data */
-void get_mwii_reading(mWiiReading *m);
+void get_mwii_reading();
 
 #endif

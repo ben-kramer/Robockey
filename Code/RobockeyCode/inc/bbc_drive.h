@@ -12,6 +12,6 @@
 #include "m_general.h"
 #include "bbc_definitions.h"
 
-void set_motor_speeds();
+void set_motor_speeds(float ml, float mr);
 
 #endif

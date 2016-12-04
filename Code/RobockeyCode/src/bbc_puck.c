@@ -21,11 +21,12 @@ void read_puck_values() {
 	if (pin_index > 8) {
 		pin_index = 0;
 	}
+	// print_adc_values(puck_ADC_values);
 }
 
 // Update the ADC array at the correct index
 void record_puck_adc(int index, int adc_val) {
-	puck_ADC_values[index] = adc_val;
+	puck_ADC_values[index] = 1024 - adc_val;
 }
 
 // Checks if the breakbeam ADC value is greater than a threshold value
@@ -93,5 +94,7 @@ float calc_puck_direction() {
 	
 	float deg_from_min =  (direction_sum / intensity_sum) + 180;
 	float deg_from_abs = deg_from_min + (45 * (min_val_index - 1)); // Convert back to absolute zero
+
+	// print_puck_angle(deg_from_abs);
 	return deg_from_abs;
 }
