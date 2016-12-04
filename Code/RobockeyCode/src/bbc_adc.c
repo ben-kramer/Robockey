@@ -18,8 +18,8 @@ void init_adc() {
 	DDRF &= ~(1<<6|1<<7);
     PORTF &= ~(1<<6|1<<7);
  
-    clear(ADMUX, REFS1); // Set ref voltage to AR
-    clear(ADMUX, REFS0);
+    clear(ADMUX, REFS1); // Set ref voltage to Vcc
+    set(ADMUX, REFS0);
   
     set(ADCSRA, ADPS2); // Set clock scale CHANGE IF clockdivide CHANGES!!!!!!
     set(ADCSRA, ADPS0); // Set clock scale CHANGE IF clockdivide CHANGES!!!!!!

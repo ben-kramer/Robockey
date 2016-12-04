@@ -21,11 +21,12 @@ void read_puck_values() {
 	if (pin_index > 8) {
 		pin_index = 0;
 	}
+	// print_adc_values(puck_ADC_values);
 }
 
 // Update the ADC array at the correct index
 void record_puck_adc(int index, int adc_val) {
-	puck_ADC_values[index] = adc_val;
+	puck_ADC_values[index] = 1024 - adc_val;
 }
 
 // Checks if the breakbeam ADC value is greater than a threshold value

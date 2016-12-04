@@ -61,8 +61,9 @@ int main(void)
 		get_mwii_reading();
 		// Calculate bot localization state
 		current = localize();
-		print_localize(current);
-
+		// print_localize(current);
+		read_puck_values();
+		// calc_puck_direction();
 		if (qualify) {qualify_mode();}
 
 		if(get_millis() - last_toggle_ms > 500) {
@@ -78,11 +79,11 @@ void qualify_mode() {
 	double goal_y = 0;
 	// Calculate the angle between the bot and the goal
 	// 0 to 360
-	double phi_to_goal = 90 - 180 * atan2((goal_y - current.y), (goal_x - current.x)) / PI;
-	if (phi_to_goal < 0) {phi_to_goal = phi_to_goal + 360;}
+	double phi_to_goal = PI/2 - atan2((goal_y - current.y), (goal_x - current.x));
+	if (phi_to_goal < 0) {phi_to_goal = phi_to_goal + 2*PI;}
 
 	double delta_phi = phi_to_goal - current.phi;
-	if (fabs(delta_phi) < 5) {
+	if (fabs(delta_phi) < 0.08) {
 		set_motor_speeds(0.8, 0.8);
 	} else {
 		int spindir = 1 - 2 * (delta_phi > 180);

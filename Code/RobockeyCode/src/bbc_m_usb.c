@@ -71,9 +71,21 @@ void print_wlss_message(WirelessMessage m) {
 #endif
 }
 
+void print_adc_values(int adc_array[9]) {
+#ifdef DEBUG_USB
+	m_usb_tx_string("\n Puck ADC Vals:");
+	int i = 0;
+	for (i = 0; i < 9; ++i) {
+		m_usb_tx_string(" ");
+		m_usb_tx_uint(adc_array[i]);
+	}
+#endif
+}
+
 void print_puck_angle(float angle) {
 #ifdef DEBUG_USB
-	m_usb_tx_uint((int)angle);
+	m_usb_tx_string("\n Puck Angle: ");
+	m_usb_tx_int((int)angle);
 #endif
 }
 

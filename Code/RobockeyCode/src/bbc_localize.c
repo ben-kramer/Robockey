@@ -332,6 +332,9 @@ constellation four_stars(int x_vals[4], int y_vals[4]) {
 }
 
 // Calculate current position and orientation
+// x,y = 0,0 is the center of the rink
+// phi = 0 is for the mWii's +5V on the left of the rink,
+// Gnd on the right, and both closer to the front of the rink
 loc_state localize() {
 	// Determine which star values should be used in calculation
 	int valid_sum = valid[0] + valid[1] + valid[2] + valid[3];
@@ -354,6 +357,8 @@ loc_state localize() {
 	}
 	// print_constellation(current_constellation, current_state);
 
+	// Convert pixel image to actual coordinates
+	// Shift by half of image dimensions to center the origin
 	int dx = -511 + current_constellation.xCent;
 	int dy = 383 - current_constellation.yCent;
 

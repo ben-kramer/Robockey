@@ -24,6 +24,8 @@ void print_wlss_message(WirelessMessage m);
 
 void print_puck_angle(float angle);
 
+void print_adc_values(int adc_array[9]);
+
 void print_mWii_data(mWiiReading m);
 
 void print_constellation(constellation constel);
