@@ -63,7 +63,7 @@ int main(void)
 		current = localize();
 		// print_localize(current);
 		read_puck_values();
-		// calc_puck_direction();
+		calc_puck_direction();
 		if (qualify) {qualify_mode();}
 
 		if(get_millis() - last_toggle_ms > 500) {

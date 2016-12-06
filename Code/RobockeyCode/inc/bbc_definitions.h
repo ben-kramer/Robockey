@@ -34,7 +34,7 @@
 #define ADC_MIN 0.0
 
 enum adc_pin_index {
-	F0, F1, F4, F5, F6, F7, D4, B4, B5
+	F0, F1, F6, F5, F7, F4, D4, B4, B5
 };
 
 #endif

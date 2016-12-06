@@ -7,6 +7,7 @@
  */
 
 #include "bbc_adc.h"
+#include "bbc_definitions.h"
 
 volatile int adc_flag = 0; // Has a conversion recently been completed
 volatile int converting = 0; // Is the system currently performing a conversion
