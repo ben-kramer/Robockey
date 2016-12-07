@@ -82,10 +82,19 @@ void print_adc_values(int adc_array[9]) {
 #endif
 }
 
-void print_puck_angle(float angle) {
+void print_puck_info() {
 #ifdef DEBUG_USB
+	float angle = calc_puck_direction();
+	float dist = calc_puck_distance();
+	int valid = found_puck();
+
 	m_usb_tx_string("\n Puck Angle: ");
-	m_usb_tx_int((int)angle);
+	m_usb_tx_int((int) (100*angle));
+	m_usb_tx_string(" Dist: ");
+	m_usb_tx_int((int) (100*dist));
+	m_usb_tx_string(" Valid: ");
+	m_usb_tx_int(valid);
+
 #endif
 }
 

@@ -26,6 +26,13 @@
 #include "bbc_localize.h"
 #include "bbc_drive.h"
 
+// Code to run for qualification purposes
 void qualify_mode();
+
+// Run to determine which team we are (red or blue)
+void determine_team();
+
+// Respond to the comm test
+void comm_test();
 
 #endif

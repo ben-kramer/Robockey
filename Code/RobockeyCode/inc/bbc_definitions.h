@@ -30,9 +30,10 @@
 
 #define BREAKBEAM_ADC_THRESH	500
 // If the front IR sensor is above this value, assume puck is at 0 degrees
-#define STRAIGHT_IR_THRESH		800 
+#define STRAIGHT_IR_THRESH		950 
 #define ADC_MAX 1024.0
 #define ADC_MIN 0.0
+#define INTENSITY_SUM_THRESH 	0.5f
 
 enum adc_pin_index {
 	F0, F1, F6, F5, F7, F4, D4, B4, B5

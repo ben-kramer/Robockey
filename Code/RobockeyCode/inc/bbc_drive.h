@@ -3,7 +3,7 @@
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
  *          Ben Bernstein
  *
- * Drive to a specific 
+ * Drive controllers 
  */
 
 #ifndef __BBC_DRIVE__

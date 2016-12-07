@@ -1,8 +1,14 @@
 #include "main.h"
 
 long last_toggle_ms = 0;
+
+// Mode
 int play_mode = 0;
 int qualify = 1;
+
+// Which goal are we DEFENDING?
+// Red team = 0, Blue team = 1
+int color = 0;
 
 ISR(TIMER1_COMPA_vect){
 	t1_compa_isr();
@@ -50,29 +56,35 @@ void init(){
 	init_mwii();
 	init_localize();
 
+	// Init R/B LED outputs
+	set(DDRB, 2);
+	set(DDRB, 3);
+	clear(PORTB, 2);
+	clear(PORTB, 3);
+
 	sei();
 }	   
 
 int main(void)
 {
 	init();
+	determine_team();
 
 	while(1) {
 
 		/* Check for an incoming message. */
 		if(wlss_get_message(&last_message)) {
 			play_mode = (last_message.type == PLAY);
+			if (last_message.type == COMM_TEST) {comm_test();}
 		}
 
-		// Fill the localize script with the latest mWii reading
-		get_mwii_reading();
-
-		// Calculate bot localization state
-		current = localize();
-		// print_localize(current);
-
-		read_puck_values();
-		calc_puck_direction();
+		if (play_mode) {
+			// strategy function
+			determine_strategy();
+		} else {
+			// Stop motors
+			set_motor_speeds(0.5, 0.5);
+		}
 
 		if (qualify) {qualify_mode();}
 
@@ -97,6 +109,26 @@ void qualify_mode() {
 		set_motor_speeds(0.8, 0.8);
 	} else {
 		int spindir = 1 - 2 * (delta_phi > 180);
-		set_motor_speeds(0.5 * spindir, -0.5 * spindir);
+		set_motor_speeds((0.5 + 0.5 * spindir), (0.5 - 0.5 * spindir));
+	}
+}
+
+// Which team are we on? Figure out based on starting orientation
+void determine_team() {
+	get_mwii_reading();
+	current = localize();
+	color = (sin(current.phi) > 0);
+}
+
+// Flash the bicolor LED
+void comm_test() {
+	if (color) { // Blue
+		set(PORTB, 2);
+		m_wait(1000);
+		clear(PORTB, 2);
+	} else { // Red
+		set(PORTB, 3);
+		m_wait(1000);
+		clear(PORTB, 3);
 	}
 }

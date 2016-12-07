@@ -15,6 +15,9 @@
 int puck_ADC_values[9] = { 0 };
 int pin_index = 0;
 
+// Is the bot confident in it's puck estimate?
+int valid_puck = 0;
+
 // Cycle through all pins, call read_adc on each
 void read_puck_values() {
 	read_adc(pin_index);
@@ -92,10 +95,28 @@ float calc_puck_direction() {
 		j++;
 		k++;
 	}
+
+	// If the intensity sum is too low, the estimation is probably bad.
+	valid_puck = (intensity_sum > INTENSITY_SUM_THRESH);
 	
 	float deg_from_min =  (direction_sum / intensity_sum) + 180;
 	float deg_from_abs = deg_from_min + (45 * (min_val_index - 1)); // Convert back to absolute zero
 
-	print_puck_angle(deg_from_abs);
 	return deg_from_abs;
+}
+
+int found_puck() {return valid_puck;}
+
+// Return measure of the distance to the puck
+float calc_puck_distance() {
+	int i;
+	int max = 0;
+	for (i = 1; i < 9; ++i) {
+		if (puck_ADC_values[i] > max) {
+			max = puck_ADC_values[i];
+		}
+	}
+	// Return 1 - the max unit intensity
+	// Low number = short distance
+	return (1.0 - (max - ADC_MIN) / (ADC_MAX - ADC_MIN));
 }

@@ -3,7 +3,7 @@
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
  *          Ben Bernstein
  *
- * Printing routines for robockey.
+ * Drive controllers 
  */
 
 #include "bbc_drive.h"
@@ -96,12 +96,12 @@ void init_async_pwm() {
 }
 
 // Sets the motor speeds and directions
-// Inputs are floats from -1 (backwards) to 1 (forwards)
+// Inputs are floats from 0 (backwards) to 1 (forwards)
 void set_motor_speeds(float ml, float mr) {
-	float left_duty = 0.5 + 0.5 * ml;
-	float right_duty = 0.5 + 0.5 * mr;
-	set_left_duty(left_duty);
-	set_right_duty(right_duty);
+	// float left_duty = 0.5 + 0.5 * ml;
+	// float right_duty = 0.5 + 0.5 * mr;
+	set_left_duty(ml);
+	set_right_duty(mr);
 
 	// print_motor_duty(left_duty, right_duty);
 }

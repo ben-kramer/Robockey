@@ -24,4 +24,10 @@ int check_breakbeam();
 // Take all ADC values and calculate current puck position
 float calc_puck_direction();
 
+// Return measure of the distance to the puck
+float calc_puck_distance();
+
+// Is the bot confident in its guess?
+int found_puck();
+
 #endif
