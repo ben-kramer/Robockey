@@ -32,4 +32,6 @@ void print_constellation(constellation constel);
 
 void print_localize(loc_state current);
 
+void print_motor_duty(float duty_l, float duty_r);
+
 #endif

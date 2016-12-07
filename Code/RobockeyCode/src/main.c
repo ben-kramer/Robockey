@@ -4,6 +4,14 @@ long last_toggle_ms = 0;
 int play_mode = 0;
 int qualify = 1;
 
+ISR(TIMER1_COMPA_vect){
+	t1_compa_isr();
+}
+
+ISR(TIMER1_COMPB_vect){
+	t1_compb_isr();
+}
+
 ISR(INT2_vect) {
 	m_green(TOGGLE);
 	wlss_isr2();
@@ -51,19 +59,21 @@ int main(void)
 
 	while(1) {
 
-		/* Check for an incoming message. If one exists, print it */
+		/* Check for an incoming message. */
 		if(wlss_get_message(&last_message)) {
-			// print_wlss_message(last_message);
 			play_mode = (last_message.type == PLAY);
 		}
 
 		// Fill the localize script with the latest mWii reading
 		get_mwii_reading();
+
 		// Calculate bot localization state
 		current = localize();
 		// print_localize(current);
+
 		read_puck_values();
-		// calc_puck_direction();
+		calc_puck_direction();
+
 		if (qualify) {qualify_mode();}
 
 		if(get_millis() - last_toggle_ms > 500) {

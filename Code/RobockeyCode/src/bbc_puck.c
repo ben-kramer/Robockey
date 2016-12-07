@@ -7,6 +7,7 @@
  */
 
 #include "bbc_puck.h"
+#include "bbc_definitions.h"
 
 // Holds the latest ADC readings from the breakbeam sensor and the eight puck searching sensors
 // 0 = Breakbeam reading
@@ -21,7 +22,7 @@ void read_puck_values() {
 	if (pin_index > 8) {
 		pin_index = 0;
 	}
-	// print_adc_values(puck_ADC_values);
+	print_adc_values(puck_ADC_values);
 }
 
 // Update the ADC array at the correct index
@@ -95,6 +96,6 @@ float calc_puck_direction() {
 	float deg_from_min =  (direction_sum / intensity_sum) + 180;
 	float deg_from_abs = deg_from_min + (45 * (min_val_index - 1)); // Convert back to absolute zero
 
-	// print_puck_angle(deg_from_abs);
+	print_puck_angle(deg_from_abs);
 	return deg_from_abs;
 }
