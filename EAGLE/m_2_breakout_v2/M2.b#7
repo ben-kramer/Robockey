@@ -1922,6 +1922,12 @@ design rules under a new name.</description>
 <element name="ML_CAP" library="ben_kramer" package="CERAMIC_CAPACITOR" value="50pF" x="-38.481" y="-14.478"/>
 <element name="ML_CAP_NOT" library="ben_kramer" package="CERAMIC_CAPACITOR" value="100pF" x="-38.481" y="-21.463"/>
 <element name="SCHMITT_INVERTER" library="ben_kramer" package="DIP14" value="SN74HC14N_SCHMITT_INVERTER" x="-48.133" y="-16.002"/>
+<element name="MR_POT" library="ben_kramer" package="POTENTIOMETER_1" value="POTENTIOMETER_1" x="-57.912" y="-23.495"/>
+<element name="MR_POT_NOT" library="ben_kramer" package="POTENTIOMETER_1" value="POTENTIOMETER_1" x="-66.167" y="-23.495"/>
+<element name="MR_CAP_NOT" library="ben_kramer" package="CERAMIC_CAPACITOR" value="100pF" x="-66.802" y="-28.448"/>
+<element name="MR_CAP" library="ben_kramer" package="CERAMIC_CAPACITOR" value="50pF" x="-66.802" y="-35.433"/>
+<element name="MR_DIODE" library="ben_kramer" package="1N914B" value="1N914B" x="-66.167" y="-42.164"/>
+<element name="ML_DIODE_NOTE" library="ben_kramer" package="1N914B" value="1N914B" x="-66.167" y="-47.625"/>
 </elements>
 <signals>
 <signal name="N$2">
@@ -2244,6 +2250,10 @@ design rules under a new name.</description>
 <contactref element="ML_CAP" pad="2"/>
 <contactref element="ML_CAP_NOT" pad="1"/>
 <contactref element="SCHMITT_INVERTER" pad="7"/>
+<contactref element="MR_CAP" pad="1"/>
+<contactref element="MR_CAP_NOT" pad="1"/>
+<wire x1="-69.342" y1="-28.448" x2="-69.342" y2="-35.433" width="0" layer="19" extent="1-1"/>
+<wire x1="-51.943" y1="-23.622" x2="-69.342" y2="-28.448" width="0" layer="19" extent="1-1"/>
 <wire x1="-41.021" y1="-21.463" x2="-51.943" y2="-23.622" width="0" layer="19" extent="1-1"/>
 <wire x1="-35.941" y1="-14.478" x2="-41.021" y2="-21.463" width="0" layer="19" extent="1-1"/>
 <wire x1="-23.622" y1="1.27" x2="-35.941" y2="-14.478" width="0" layer="19" extent="1-1"/>
@@ -2290,6 +2300,36 @@ design rules under a new name.</description>
 </signal>
 <signal name="MR_PWM_NOT">
 <contactref element="HEX_INVERTER" pad="12"/>
+<contactref element="MR_POT" pad="3"/>
+<contactref element="MR_DIODE" pad="-"/>
+<contactref element="MR_POT_NOT" pad="3"/>
+<contactref element="ML_DIODE_NOTE" pad="+"/>
+<wire x1="-63.3095" y1="-42.164" x2="-69.342" y2="-47.625" width="0" layer="19" extent="1-1"/>
+<wire x1="-63.627" y1="-23.495" x2="-63.3095" y2="-42.164" width="0" layer="19" extent="1-1"/>
+<wire x1="-55.372" y1="-23.495" x2="-63.627" y2="-23.495" width="0" layer="19" extent="1-1"/>
+<wire x1="-16.002" y1="11.43" x2="-55.372" y2="-23.495" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$1">
+<contactref element="MR_POT" pad="2"/>
+<contactref element="MR_CAP" pad="2"/>
+<contactref element="SCHMITT_INVERTER" pad="13"/>
+<wire x1="-57.912" y1="-18.415" x2="-64.262" y2="-35.433" width="0" layer="19" extent="1-1"/>
+<wire x1="-44.323" y1="-10.922" x2="-57.912" y2="-18.415" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$4">
+<contactref element="MR_POT_NOT" pad="2"/>
+<contactref element="MR_CAP_NOT" pad="2"/>
+<contactref element="ML_DIODE_NOTE" pad="-"/>
+<contactref element="SCHMITT_INVERTER" pad="11"/>
+<wire x1="-64.262" y1="-28.448" x2="-63.3095" y2="-47.625" width="0" layer="19" extent="1-1"/>
+<wire x1="-66.167" y1="-18.415" x2="-64.262" y2="-28.448" width="0" layer="19" extent="1-1"/>
+<wire x1="-44.323" y1="-16.002" x2="-66.167" y2="-18.415" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="MR_OUT1">
+<contactref element="SCHMITT_INVERTER" pad="12"/>
+</signal>
+<signal name="MR_OUT2">
+<contactref element="SCHMITT_INVERTER" pad="10"/>
 </signal>
 </signals>
 <errors>

@@ -1662,6 +1662,24 @@ W = angled&lt;p&gt;
 <text x="-3.175" y="1.905" size="1.27" layer="25" distance="12">&gt;NAME</text>
 <text x="-3.175" y="-2.8575" size="1.27" layer="27" distance="12">&gt;VALUE</text>
 </package>
+<package name="ARDUINO_HEADER_3X2">
+<pad name="1" x="-1.27" y="2.54" drill="0.8" diameter="1.6764" shape="octagon"/>
+<pad name="4" x="1.27" y="2.54" drill="0.8" diameter="1.6764" shape="octagon"/>
+<pad name="2" x="-1.27" y="0" drill="0.8" diameter="1.6764" shape="octagon"/>
+<pad name="5" x="1.27" y="0" drill="0.8" diameter="1.6764" shape="octagon"/>
+<pad name="3" x="-1.27" y="-2.54" drill="0.8" diameter="1.6764" shape="octagon"/>
+<pad name="6" x="1.27" y="-2.54" drill="0.8" diameter="1.6764" shape="octagon"/>
+<wire x1="-2.54" y1="3.81" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="-2.54" y1="-3.81" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-3.81" x2="2.54" y2="3.81" width="0.127" layer="21"/>
+<wire x1="2.54" y1="3.81" x2="-2.54" y2="3.81" width="0.127" layer="21"/>
+<polygon width="0.127" layer="21">
+<vertex x="-1.27" y="3.81"/>
+<vertex x="-2.54" y="2.54"/>
+<vertex x="-2.54" y="3.81"/>
+</polygon>
+<text x="-2.54" y="4.445" size="1.27" layer="25" distance="12">&gt;NAME</text>
+</package>
 </packages>
 </library>
 </libraries>
@@ -1928,6 +1946,7 @@ design rules under a new name.</description>
 <element name="MR_CAP" library="ben_kramer" package="CERAMIC_CAPACITOR" value="50pF" x="-66.802" y="-35.433"/>
 <element name="MR_DIODE" library="ben_kramer" package="1N914B" value="1N914B" x="-66.167" y="-42.164"/>
 <element name="ML_DIODE_NOTE" library="ben_kramer" package="1N914B" value="1N914B" x="-66.167" y="-47.625"/>
+<element name="TO_MOTOR_CONTROLLER" library="ben_kramer" package="ARDUINO_HEADER_3X2" value="ARDUINO_HEADER_3X2" x="-75.057" y="-45.72"/>
 </elements>
 <signals>
 <signal name="N$2">
@@ -2200,6 +2219,8 @@ design rules under a new name.</description>
 <contactref element="P_ML_EN" pad="MP"/>
 <wire x1="44.323" y1="24.765" x2="38.354" y2="25.273" width="1.6764" layer="16"/>
 <wire x1="70.231" y1="31.75" x2="44.323" y2="24.765" width="1.6764" layer="16"/>
+<contactref element="TO_MOTOR_CONTROLLER" pad="1"/>
+<wire x1="38.354" y1="25.273" x2="-76.327" y2="-43.18" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="MR_EN" class="1">
 <contactref element="U$1" pad="B1"/>
@@ -2207,6 +2228,8 @@ design rules under a new name.</description>
 <contactref element="P_MR_EN" pad="MP"/>
 <wire x1="34.417" y1="28.702" x2="44.323" y2="27.305" width="1.6764" layer="16"/>
 <wire x1="70.231" y1="34.29" x2="44.323" y2="27.305" width="1.6764" layer="16"/>
+<contactref element="TO_MOTOR_CONTROLLER" pad="4"/>
+<wire x1="34.417" y1="28.702" x2="-73.787" y2="-43.18" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B2" class="1">
 <contactref element="U$1" pad="B2"/>
@@ -2289,6 +2312,8 @@ design rules under a new name.</description>
 </signal>
 <signal name="ML_OUT1">
 <contactref element="SCHMITT_INVERTER" pad="2"/>
+<contactref element="TO_MOTOR_CONTROLLER" pad="2"/>
+<wire x1="-51.943" y1="-10.922" x2="-76.327" y2="-45.72" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ML_OUT2_NOT">
 <contactref element="SCHMITT_INVERTER" pad="4"/>
@@ -2297,6 +2322,8 @@ design rules under a new name.</description>
 </signal>
 <signal name="ML_OUT2">
 <contactref element="HEX_INVERTER" pad="4"/>
+<contactref element="TO_MOTOR_CONTROLLER" pad="3"/>
+<wire x1="-23.622" y1="8.89" x2="-76.327" y2="-48.26" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="MR_PWM_NOT">
 <contactref element="HEX_INVERTER" pad="12"/>
@@ -2329,6 +2356,8 @@ design rules under a new name.</description>
 </signal>
 <signal name="MR_OUT1">
 <contactref element="SCHMITT_INVERTER" pad="12"/>
+<contactref element="TO_MOTOR_CONTROLLER" pad="5"/>
+<wire x1="-44.323" y1="-13.462" x2="-73.787" y2="-45.72" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="MR_OUT2_NOT">
 <contactref element="SCHMITT_INVERTER" pad="10"/>
@@ -2337,6 +2366,8 @@ design rules under a new name.</description>
 </signal>
 <signal name="MR_OUT2">
 <contactref element="HEX_INVERTER" pad="10"/>
+<contactref element="TO_MOTOR_CONTROLLER" pad="6"/>
+<wire x1="-16.002" y1="6.35" x2="-73.787" y2="-48.26" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <errors>

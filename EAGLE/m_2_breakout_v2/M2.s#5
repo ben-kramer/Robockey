@@ -6113,6 +6113,12 @@ W = angled&lt;p&gt;
 <part name="ML_CAP" library="ben_kramer" deviceset="CERAMIC_CAPACITOR" device="" value="50pF"/>
 <part name="ML_CAP_NOT" library="ben_kramer" deviceset="CERAMIC_CAPACITOR" device="" value="100pF"/>
 <part name="SCHMITT_INVERTER" library="ben_kramer" deviceset="SN74HC14N_SCHMITT_INVERTER" device=""/>
+<part name="MR_POT" library="ben_kramer" deviceset="POTENTIOMETER_1" device=""/>
+<part name="MR_POT_NOT" library="ben_kramer" deviceset="POTENTIOMETER_1" device=""/>
+<part name="MR_CAP_NOT" library="ben_kramer" deviceset="CERAMIC_CAPACITOR" device="" value="100pF"/>
+<part name="MR_CAP" library="ben_kramer" deviceset="CERAMIC_CAPACITOR" device="" value="50pF"/>
+<part name="MR_DIODE" library="ben_kramer" deviceset="1N914B" device=""/>
+<part name="ML_DIODE_NOTE" library="ben_kramer" deviceset="1N914B" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -6179,6 +6185,12 @@ W = angled&lt;p&gt;
 <instance part="ML_CAP" gate="G$1" x="-58.674" y="56.896" rot="R180"/>
 <instance part="ML_CAP_NOT" gate="G$1" x="-58.42" y="43.942"/>
 <instance part="SCHMITT_INVERTER" gate="G$1" x="-96.52" y="50.8"/>
+<instance part="MR_POT" gate="G$1" x="-43.18" y="15.24"/>
+<instance part="MR_POT_NOT" gate="G$1" x="-43.18" y="0.254"/>
+<instance part="MR_CAP_NOT" gate="G$1" x="-56.388" y="-2.54"/>
+<instance part="MR_CAP" gate="G$1" x="-57.404" y="18.542"/>
+<instance part="MR_DIODE" gate="G$1" x="-42.164" y="23.368"/>
+<instance part="ML_DIODE_NOTE" gate="G$1" x="-44.196" y="-6.35" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -6597,6 +6609,13 @@ W = angled&lt;p&gt;
 <wire x1="-106.68" y1="40.64" x2="-109.22" y2="40.64" width="0.1524" layer="91"/>
 <label x="-112.522" y="40.64" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="MR_CAP" gate="G$1" pin="1"/>
+<wire x1="-59.944" y1="18.542" x2="-65.532" y2="18.542" width="0.1524" layer="91"/>
+<wire x1="-65.532" y1="18.542" x2="-65.532" y2="-2.54" width="0.1524" layer="91"/>
+<pinref part="MR_CAP_NOT" gate="G$1" pin="1"/>
+<wire x1="-65.532" y1="-2.54" x2="-58.928" y2="-2.54" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="ML_PWM_NOT" class="0">
 <segment>
@@ -6688,6 +6707,69 @@ W = angled&lt;p&gt;
 <pinref part="HEX_INVERTER" gate="G$1" pin="6Y"/>
 <wire x1="17.78" y1="50.8" x2="20.32" y2="50.8" width="0.1524" layer="91"/>
 <label x="20.066" y="51.054" size="1.778" layer="95"/>
+<wire x1="20.32" y1="50.8" x2="20.32" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="20.32" y1="15.24" x2="-34.544" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="MR_POT" gate="G$1" pin="3"/>
+<pinref part="MR_DIODE" gate="G$1" pin="-"/>
+<wire x1="-34.544" y1="15.24" x2="-36.83" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="-39.624" y1="23.368" x2="-34.544" y2="23.368" width="0.1524" layer="91"/>
+<wire x1="-34.544" y1="23.368" x2="-34.544" y2="15.24" width="0.1524" layer="91"/>
+<junction x="-34.544" y="15.24"/>
+<wire x1="-34.544" y1="15.24" x2="-34.544" y2="0.254" width="0.1524" layer="91"/>
+<pinref part="MR_POT_NOT" gate="G$1" pin="3"/>
+<wire x1="-34.544" y1="0.254" x2="-36.83" y2="0.254" width="0.1524" layer="91"/>
+<wire x1="-34.544" y1="0.254" x2="-34.544" y2="-6.35" width="0.1524" layer="91"/>
+<junction x="-34.544" y="0.254"/>
+<pinref part="ML_DIODE_NOTE" gate="G$1" pin="+"/>
+<wire x1="-34.544" y1="-6.35" x2="-39.116" y2="-6.35" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="MR_POT" gate="G$1" pin="2"/>
+<pinref part="MR_CAP" gate="G$1" pin="2"/>
+<wire x1="-43.18" y1="18.542" x2="-52.07" y2="18.542" width="0.1524" layer="91"/>
+<wire x1="-52.07" y1="18.542" x2="-54.864" y2="18.542" width="0.1524" layer="91"/>
+<wire x1="-47.244" y1="23.622" x2="-52.07" y2="23.622" width="0.1524" layer="91"/>
+<wire x1="-52.07" y1="23.622" x2="-52.07" y2="18.542" width="0.1524" layer="91"/>
+<junction x="-52.07" y="18.542"/>
+<wire x1="-52.07" y1="23.622" x2="-72.39" y2="23.622" width="0.1524" layer="91"/>
+<wire x1="-72.39" y1="23.622" x2="-72.39" y2="53.34" width="0.1524" layer="91"/>
+<junction x="-52.07" y="23.622"/>
+<pinref part="SCHMITT_INVERTER" gate="G$1" pin="6A"/>
+<wire x1="-72.39" y1="53.34" x2="-88.9" y2="53.34" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="MR_POT_NOT" gate="G$1" pin="2"/>
+<wire x1="-43.18" y1="3.556" x2="-51.816" y2="3.556" width="0.1524" layer="91"/>
+<wire x1="-51.816" y1="3.556" x2="-51.816" y2="-2.54" width="0.1524" layer="91"/>
+<pinref part="MR_CAP_NOT" gate="G$1" pin="2"/>
+<wire x1="-51.816" y1="-2.54" x2="-53.848" y2="-2.54" width="0.1524" layer="91"/>
+<pinref part="ML_DIODE_NOTE" gate="G$1" pin="-"/>
+<wire x1="-46.736" y1="-6.35" x2="-51.816" y2="-6.35" width="0.1524" layer="91"/>
+<wire x1="-51.816" y1="-6.35" x2="-51.816" y2="-2.54" width="0.1524" layer="91"/>
+<junction x="-51.816" y="-2.54"/>
+<wire x1="-51.816" y1="3.556" x2="-74.422" y2="3.556" width="0.1524" layer="91"/>
+<wire x1="-74.422" y1="3.556" x2="-74.422" y2="48.26" width="0.1524" layer="91"/>
+<junction x="-51.816" y="3.556"/>
+<pinref part="SCHMITT_INVERTER" gate="G$1" pin="5A"/>
+<wire x1="-74.422" y1="48.26" x2="-88.9" y2="48.26" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="MR_OUT1" class="0">
+<segment>
+<pinref part="SCHMITT_INVERTER" gate="G$1" pin="6Y"/>
+<wire x1="-88.9" y1="50.8" x2="-86.614" y2="50.8" width="0.1524" layer="91"/>
+<label x="-88.646" y="51.054" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="MR_OUT2" class="0">
+<segment>
+<pinref part="SCHMITT_INVERTER" gate="G$1" pin="5Y"/>
+<wire x1="-88.9" y1="45.72" x2="-86.614" y2="45.72" width="0.1524" layer="91"/>
+<label x="-88.646" y="45.974" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

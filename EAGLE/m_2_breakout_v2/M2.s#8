@@ -6655,15 +6655,27 @@ W = angled&lt;p&gt;
 <net name="ML_OUT1" class="0">
 <segment>
 <pinref part="SCHMITT_INVERTER" gate="G$1" pin="1Y"/>
-<wire x1="-106.68" y1="53.34" x2="-116.332" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="53.34" x2="-109.728" y2="53.34" width="0.1524" layer="91"/>
 <label x="-118.618" y="53.594" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ML_OUT2_NOT" class="0">
 <segment>
 <pinref part="SCHMITT_INVERTER" gate="G$1" pin="2Y"/>
-<wire x1="-106.68" y1="48.26" x2="-116.332" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="48.26" x2="-109.982" y2="48.26" width="0.1524" layer="91"/>
 <label x="-124.714" y="48.514" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="HEX_INVERTER" gate="G$1" pin="2A"/>
+<wire x1="-2.54" y1="50.8" x2="-6.35" y2="50.8" width="0.1524" layer="91"/>
+<label x="-21.336" y="51.054" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="ML_OUT2" class="0">
+<segment>
+<pinref part="HEX_INVERTER" gate="G$1" pin="2Y"/>
+<wire x1="-2.54" y1="48.26" x2="-6.35" y2="48.26" width="0.1524" layer="91"/>
+<label x="-14.732" y="48.514" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

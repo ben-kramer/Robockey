@@ -2313,6 +2313,8 @@ design rules under a new name.</description>
 <contactref element="MR_POT" pad="2"/>
 <contactref element="MR_CAP" pad="2"/>
 <contactref element="SCHMITT_INVERTER" pad="13"/>
+<contactref element="MR_DIODE" pad="+"/>
+<wire x1="-64.262" y1="-35.433" x2="-69.342" y2="-42.164" width="0" layer="19" extent="1-1"/>
 <wire x1="-57.912" y1="-18.415" x2="-64.262" y2="-35.433" width="0" layer="19" extent="1-1"/>
 <wire x1="-44.323" y1="-10.922" x2="-57.912" y2="-18.415" width="0" layer="19" extent="1-1"/>
 </signal>

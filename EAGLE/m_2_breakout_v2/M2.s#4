@@ -6765,7 +6765,7 @@ W = angled&lt;p&gt;
 <label x="-88.646" y="51.054" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="MR_OUT2" class="0">
+<net name="MR_OUT2_NOT" class="0">
 <segment>
 <pinref part="SCHMITT_INVERTER" gate="G$1" pin="5Y"/>
 <wire x1="-88.9" y1="45.72" x2="-86.614" y2="45.72" width="0.1524" layer="91"/>

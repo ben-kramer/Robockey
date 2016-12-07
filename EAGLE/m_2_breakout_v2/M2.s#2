@@ -6326,7 +6326,7 @@ W = angled&lt;p&gt;
 <segment>
 <pinref part="HEX_INVERTER" gate="G$1" pin="6A"/>
 <wire x1="17.78" y1="53.34" x2="20.32" y2="53.34" width="0.1524" layer="91"/>
-<label x="20.066" y="53.594" size="1.778" layer="95"/>
+<label x="20.32" y="53.594" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="WDATA" class="0">
@@ -6706,7 +6706,7 @@ W = angled&lt;p&gt;
 <segment>
 <pinref part="HEX_INVERTER" gate="G$1" pin="6Y"/>
 <wire x1="17.78" y1="50.8" x2="20.32" y2="50.8" width="0.1524" layer="91"/>
-<label x="20.066" y="51.054" size="1.778" layer="95"/>
+<label x="20.32" y="51.054" size="1.778" layer="95"/>
 <wire x1="20.32" y1="50.8" x2="20.32" y2="15.24" width="0.1524" layer="91"/>
 <wire x1="20.32" y1="15.24" x2="-34.544" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="MR_POT" gate="G$1" pin="3"/>
@@ -6771,6 +6771,18 @@ W = angled&lt;p&gt;
 <pinref part="SCHMITT_INVERTER" gate="G$1" pin="5Y"/>
 <wire x1="-88.9" y1="45.72" x2="-86.614" y2="45.72" width="0.1524" layer="91"/>
 <label x="-88.646" y="45.974" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="HEX_INVERTER" gate="G$1" pin="5A"/>
+<wire x1="17.78" y1="48.26" x2="22.098" y2="48.26" width="0.1524" layer="91"/>
+<label x="20.32" y="48.26" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="MR_OUT2" class="0">
+<segment>
+<pinref part="HEX_INVERTER" gate="G$1" pin="5Y"/>
+<wire x1="17.78" y1="45.72" x2="22.098" y2="45.72" width="0.1524" layer="91"/>
+<label x="20.32" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

@@ -1995,6 +1995,8 @@ design rules under a new name.</description>
 <contactref element="U$1" pad="B7"/>
 <contactref element="X2" pad="9"/>
 <wire x1="44.323" y1="34.925" x2="70.231" y2="41.91" width="1.6764" layer="16"/>
+<contactref element="HEX_INVERTER" pad="13"/>
+<wire x1="-16.002" y1="13.97" x2="44.323" y2="34.925" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="WDATA">
 <contactref element="U$1" pad="D1"/>
@@ -2285,6 +2287,9 @@ design rules under a new name.</description>
 </signal>
 <signal name="ML_OUT2">
 <contactref element="HEX_INVERTER" pad="4"/>
+</signal>
+<signal name="MR_PWM_NOT">
+<contactref element="HEX_INVERTER" pad="12"/>
 </signal>
 </signals>
 <errors>

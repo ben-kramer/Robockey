@@ -2280,6 +2280,11 @@ design rules under a new name.</description>
 </signal>
 <signal name="ML_OUT2_NOT">
 <contactref element="SCHMITT_INVERTER" pad="4"/>
+<contactref element="HEX_INVERTER" pad="3"/>
+<wire x1="-23.622" y1="11.43" x2="-51.943" y2="-16.002" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="ML_OUT2">
+<contactref element="HEX_INVERTER" pad="4"/>
 </signal>
 </signals>
 <errors>
