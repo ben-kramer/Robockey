@@ -89,7 +89,7 @@ void print_puck_info() {
 	int valid = found_puck();
 
 	m_usb_tx_string("\n Puck - Angle: ");
-	m_usb_tx_int((int) (100*angle));
+	m_usb_tx_int((int) (angle));
 	m_usb_tx_string(" Dist: ");
 	m_usb_tx_int((int) (100*dist));
 	m_usb_tx_string(" Valid: ");

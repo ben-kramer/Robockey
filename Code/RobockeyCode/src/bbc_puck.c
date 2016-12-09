@@ -22,10 +22,13 @@ int valid_puck = 0;
 void read_puck_values() {
 	read_adc(pin_index);
 	pin_index++;
+	// if (pin_index == 7) {
+	// 	pin_index++;
+	// }
 	if (pin_index > 8) {
 		pin_index = 0;
 	}
-	// print_adc_values(puck_ADC_values);
+	print_adc_values(puck_ADC_values);
 }
 
 // Update the ADC array at the correct index
@@ -71,7 +74,7 @@ float calc_puck_direction() {
 	// Start at the min, call its angle 0
 	int j = min_val_index;
 	int k = 1;
-	while (j < 9) {
+	while (j < 9) { if (j != 7) {
 		int this_val = puck_ADC_values[j]; // Sanitize the ADC value
 		// Normalize the reading compared to known min and max ADC values
 		// This will give a decimal from 0 to 1
@@ -81,10 +84,10 @@ float calc_puck_direction() {
 		direction_sum += unit_intensity * (-180 + (45.0 * (k - 1)));
 		j++;
 		k++;
-	}
+	}}
 
 	j = 1;
-	while (j < min_val_index) {
+	while (j < min_val_index) { if (j != 7) {
 		int this_val = puck_ADC_values[j]; // Sanitize the ADC value
 		// Normalize the reading compared to known min and max ADC values
 		// This will give a decimal from 0 to 1
@@ -94,7 +97,7 @@ float calc_puck_direction() {
 		direction_sum += unit_intensity * (-180 + (45.0 * (k - 1)));
 		j++;
 		k++;
-	}
+	}}
 
 	// If the intensity sum is too low, the estimation is probably bad.
 	valid_puck = (intensity_sum > INTENSITY_SUM_THRESH);

@@ -10,7 +10,7 @@
 #define __BBC_DEFINITIONS__
 
 /* Uncomment this to see debug information */
-#define DEBUG_USB
+// #define DEBUG_USB
 #define PI 					3.14159265
 
 #define CLOCK 16000000
@@ -32,7 +32,8 @@
 // Make this enum's order match the IR sensors going clockwise starting at the front
 // i.e. 1 = front ir (0 degrees), 2 = 45 degrees clockwise, 3 90 degrees clockwise, etc.
 enum adc_pin_index {
-	F0, F1, F6, F5, F7, F4, D4, B4, B5
+	// F0, F1, F6, F5, F7, F4, D4, B4, B5
+	F7, B5, B4, F5, F6, F4, F1, D4, F0 
 };
 
 #define BREAKBEAM_ADC_THRESH	500
@@ -55,6 +56,11 @@ enum adc_pin_index {
 #define GOALIE_DIST_THRESH		0.5
 
 #define DRIVE_SPEED				0.8f
-#define SPIN_DIFF				0.1
+#define GOALIE_DRIVE_SPEED		0.9
+#define ROTATION_SPEED			0.6
+#define GOALIE_ANGLE_OFFSET		0.2
+#define MIN_RAD_DUTY_DIFF		0.1
+
+#define GOAL_Y_POINT			10
 
 #endif

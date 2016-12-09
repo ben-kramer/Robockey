@@ -66,8 +66,8 @@ int wlss_get_message(WirelessMessage *m) {
 		default: 
 			m->type = UNKNOWN;
 			#ifdef DEBUG_USB
-				m_usb_tx_string("Bad character received! It was: ");
-				m_usb_tx_hex(buf[0]);
+				// m_usb_tx_string("Bad character received! It was: ");
+				// m_usb_tx_hex(buf[0]);
 			#endif
 			break;
 	}

@@ -27,3 +27,7 @@ void drive_to_puck();
 void return_to_goal(int our_goal);
 
 float calc_delta_phi(float cX, float cY, float cPhi, int pX, int pY);
+
+motor_duty rotate_in_place(float phi_des);
+
+motor_duty calc_motor_diff(float max_duty, float del_phi, int has_puck);

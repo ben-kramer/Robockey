@@ -14,43 +14,7 @@ volatile int pwm_count = 0;
 volatile int not_pwm_count = 0;
 
 void init_drive() {
-	init_timer_1();
-	init_pwm_1();
 	init_async_pwm();
-}
-
-void t1_compa_isr() {
-	pwm_count = 0;
-	set(PORTB,0);
-	clear(PORTB,1);
-	set(PORTB,2);
-	clear(PORTB,3);
-}
-
-void t1_compb_isr() {
-	not_pwm_count = 0;
-	set(PORTB,1);
-	clear(PORTB,0);	
-	set(PORTB,3);
-	clear(PORTB,2);
-}
-
-void init_timer_1() 
-{	
-
-	TCCR1B |= (1<<CS10) | (1<<WGM12); 					//Set clock divider to 1 | Count up to OCR1A
-	OCR1A = 800;										//20kHz
-	OCR1B = 400;										//duty cycle
-	TIMSK1 |= (1<<OCIE1A) | (1<<OCIE1B);  //Enable Inturrupts
-}  
-
-void init_pwm_1(){
-	DDRB |= (1<<0) | (1<<1) | (1<<2) | (1<<3);
-	clear(PORTB,0);
-	clear(PORTB,1);
-	clear(PORTB,2);
-	clear(PORTB,3);
-
 }
 
 /* Sets duty cycle on B6 */
@@ -88,9 +52,6 @@ void init_async_pwm() {
 
 	set(TCCR1A, COM1C1);
 	clear(TCCR1A, COM1C0);
-
-	/* Enable interrupts */
-	set(TIMSK1, OCIE1A);
 
 	/* 20 KHz PWM */
 	OCR1A = CYCLES_20KHZ;

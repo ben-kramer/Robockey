@@ -1,6 +1,6 @@
 #include "main.h"
 
-/* Things to check
+/* 	Things to check
 
 	Localization
 		x	Good mWii readings
@@ -23,11 +23,11 @@
 		Drive forwards and backwards straight line
 		Rotate in a circle
 		Drive in a circle
-		Set a speed limit?
+		x	Set a speed limit?
 
 	Strategy
-			Is bot a goalie
-			Which color are we defending
+		x	Is bot a goalie
+		x	Which color are we defending
 		Calculate min turning radius
 		Write goalie strategy
 
@@ -35,8 +35,7 @@
 long last_toggle_ms = 0;
 
 // Mode
-int play_mode = 1;
-int qualify = 0;
+int play_mode = 0;
 int goalie = 0;
 
 // Which team color are we
@@ -45,14 +44,6 @@ int color = 0;
 // Which goal are we DEFENDING?
 // Red goal = 0, Blue goal = 1
 int goal_to_defend = 0;
-
-ISR(TIMER1_COMPA_vect){
-	t1_compa_isr();
-}
-
-ISR(TIMER1_COMPB_vect){
-	t1_compb_isr();
-}
 
 ISR(INT2_vect) {
 	wlss_isr2();
@@ -77,6 +68,7 @@ WirelessMessage last_message;
 
 /* Initialization functions */
 void init(){
+	m_red(ON);
 	m_disableJTAG();
 	m_clockdivide(0);
 	m_bus_init();
@@ -91,13 +83,18 @@ void init(){
 	init_drive();
 
 	// Init color switch input on D3
-	clear(DDRD, 3);
-	set(PORTD, 3); // Enable pullup resistor
+	clear(DDRD, 7);
+	set(PORTD, 7); // Enable pullup resistor
 	// Init R/B LED outputs
 	set(DDRB, 2);
 	set(DDRB, 3);
 	clear(PORTB, 2);
 	clear(PORTB, 3);
+
+
+	/* Initialize enable pins */
+	DDRB |= 0x03;
+	PORTB |= (0x03);
 
 	sei();
 }	   
@@ -108,6 +105,8 @@ int main(void)
 	m_red(ON); // Made it to the loop
 	m_green(OFF);
 	determine_start();
+	// comm_test();
+	PORTB |= (0x03);
 
 	while(1) {
 
@@ -121,14 +120,14 @@ int main(void)
 		}
 
 		if (play_mode) {
+			PORTB &= ~(0x03);
 			m_green(ON); // Playing
-			determine_strategy(goalie, goal_to_defend);
+			set_motor_speeds(0.8, 0.75); // Stop motors
 		} else {
+			PORTB |= (0x03);
 			m_green(OFF);
-			set_motor_speeds(0.5, 0.5); // Stop motors
+			set_motor_speeds(0.5, 0.5);
 		}
-
-		if (qualify) {qualify_mode();}
 
 		if(get_millis() - last_toggle_ms > 500) {
 			m_red(TOGGLE);
@@ -140,34 +139,13 @@ int main(void)
 
 }
 
-void qualify_mode() {
-	// get_mwii_reading();
-	// current = localize();
-
-	double goal_x = 115 * (1 - 2 * goal_to_defend); // Go to the goal on the opposite side
-	double goal_y = 0;
-	// Calculate the angle between the bot and the goal
-	// 0 to 360
-	double phi_to_goal = PI/2 - atan2((goal_y - current.y), (goal_x - current.x));
-	if (phi_to_goal < 0) {phi_to_goal = phi_to_goal + 2*PI;}
-
-	double delta_phi = phi_to_goal - current.phi;
-	if (fabs(delta_phi) < 0.08) {
-		set_motor_speeds(0.8, 0.8);
-	} else {
-		int spindir = 1 - 2 * (delta_phi > 180);
-		set_motor_speeds((0.5 + 0.1 * spindir), (0.5 - 0.1 * spindir));
-	}
-	// print_qualify(phi_to_goal)
-}
-
 // Run to determine which team we are defending (red or blue) and whether the bot is a goalie
 void determine_start() {
 	get_mwii_reading();
 	current = localize();
 
 	// Set our team's color
-	if (!check(PIND,3)) {
+	if (!check(PIND,7)) {
 		color = 1;
 	}
 	// If on the left  side, we are defending blue
