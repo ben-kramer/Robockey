@@ -13,6 +13,12 @@ const unsigned char nextValue = 0;
 volatile int pwm_count = 0;
 volatile int not_pwm_count = 0;
 
+void init_drive() {
+	init_timer_1();
+	init_pwm_1();
+	init_async_pwm();
+}
+
 void t1_compa_isr() {
 	pwm_count = 0;
 	set(PORTB,0);

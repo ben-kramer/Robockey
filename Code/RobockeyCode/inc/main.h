@@ -29,8 +29,8 @@
 // Code to run for qualification purposes
 void qualify_mode();
 
-// Run to determine which team we are (red or blue)
-void determine_team();
+// Run to determine which team we are defending (red or blue) and whether the bot is a goalie
+void determine_start();
 
 // Respond to the comm test
 void comm_test();

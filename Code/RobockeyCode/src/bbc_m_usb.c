@@ -18,7 +18,7 @@ void init_usb() {
 	if(m_usb_isconnected()) {
 		m_red(ON);
 		m_green(ON);
-		m_wait(1000);
+		m_wait(500);
 		m_red(OFF);
 		m_green(OFF);
 	}
@@ -27,7 +27,7 @@ void init_usb() {
 
 void print_wlss_message(WirelessMessage m) {
 #ifdef DEBUG_USB
-/* Print the message type */
+	/* Print the message type */
 	switch(m.type) {
 		case COMM_TEST: 
 			m_usb_tx_string("WirelessMessage is COMM_TEST.\n");
@@ -88,7 +88,7 @@ void print_puck_info() {
 	float dist = calc_puck_distance();
 	int valid = found_puck();
 
-	m_usb_tx_string("\n Puck Angle: ");
+	m_usb_tx_string("\n Puck - Angle: ");
 	m_usb_tx_int((int) (100*angle));
 	m_usb_tx_string(" Dist: ");
 	m_usb_tx_int((int) (100*dist));
@@ -102,7 +102,7 @@ void print_mWii_data(mWiiReading m) {
 #ifdef DEBUG_USB
 	int i;
 	for (i = 0; i < 4; ++i) {
-		m_usb_tx_string("\nmWii x");
+		m_usb_tx_string("\nmWii blobs - x");
 		m_usb_tx_int(i);
 		m_usb_tx_string(": ");
 		m_usb_tx_int(m.data[i][0]);
@@ -120,7 +120,7 @@ void print_mWii_data(mWiiReading m) {
 
 void print_constellation(constellation constel) {
 #ifdef DEBUG_USB
-	m_usb_tx_string("\nConst data: xC: ");
+	m_usb_tx_string("\nConst data - xC: ");
 	m_usb_tx_int((int) constel.xCent);
 	m_usb_tx_string(" yC: ");
 	m_usb_tx_int((int) constel.yCent);
@@ -133,7 +133,7 @@ void print_constellation(constellation constel) {
 
 void print_localize(loc_state current) {
 #ifdef DEBUG_USB
-	m_usb_tx_string("\nCurrent xPos: ");
+	m_usb_tx_string("\nCurrent - xPos: ");
 	m_usb_tx_int((int) current.x);
 	m_usb_tx_string(" yPos: ");
 	m_usb_tx_int((int) current.y);
@@ -144,9 +144,24 @@ void print_localize(loc_state current) {
 
 void print_motor_duty(float duty_l, float duty_r) {
 #ifdef DEBUG_USB
-	m_usb_tx_string("\n Motor duty (x100) left: ");
+	m_usb_tx_string("\nMotor duty (x100) - left: ");
 	m_usb_tx_int((int) duty_l * 100);
 	m_usb_tx_string(" right: ");
 	m_usb_tx_int((int) duty_r * 100);
+#endif
+}
+
+void print_main_loop(int play_mode, int goalie, int goal_to_defend) {
+#ifdef DEBUG_USB
+	m_usb_tx_string("\nLoop modes - play: ");
+	m_usb_tx_int(play_mode);
+	m_usb_tx_string(" goalie: ");
+	m_usb_tx_int(goalie);
+	m_usb_tx_string(" defended-goal: ");
+	if (goal_to_defend) {
+		m_usb_tx_string("blue");
+	} else {
+		m_usb_tx_string("red");
+	}
 #endif
 }

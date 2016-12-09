@@ -11,6 +11,9 @@
 
 #include "m_general.h"
 #include "bbc_definitions.h"
+// #include "bbc_pid.h"
+
+void init_drive();
 
 void t1_compa_isr();
 

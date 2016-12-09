@@ -28,15 +28,33 @@
  * =========================== ADC Conversion Pins ========================== *
  * ========================================================================== */
 
+// First index is the breakbeam
+// Make this enum's order match the IR sensors going clockwise starting at the front
+// i.e. 1 = front ir (0 degrees), 2 = 45 degrees clockwise, 3 90 degrees clockwise, etc.
+enum adc_pin_index {
+	F0, F1, F6, F5, F7, F4, D4, B4, B5
+};
+
 #define BREAKBEAM_ADC_THRESH	500
 // If the front IR sensor is above this value, assume puck is at 0 degrees
 #define STRAIGHT_IR_THRESH		950 
 #define ADC_MAX 1024.0
 #define ADC_MIN 0.0
-#define INTENSITY_SUM_THRESH 	0.5f
+#define INTENSITY_SUM_THRESH 	0.1f
 
-enum adc_pin_index {
-	F0, F1, F6, F5, F7, F4, D4, B4, B5
-};
+// mWii definitions
+
+#define MWII_ANGLE_OFFSET		0 // in radians
+
+
+/* ========================================================================== *
+ * ================================ Strategy ================================ *
+ * ========================================================================== */
+
+#define GOALIE_X_THRESH			90
+#define GOALIE_DIST_THRESH		0.5f
+
+#define DRIVE_SPEED				0.8f
+#define SPIN_DIFF				0.1f
 
 #endif

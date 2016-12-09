@@ -362,9 +362,9 @@ loc_state localize() {
 	int dx = -511 + current_constellation.xCent;
 	int dy = 383 - current_constellation.yCent;
 
-	current_state.x = current_constellation.scale*(cos(current_constellation.theta) * dx + sin(current_constellation.theta) * dy);
-	current_state.y = current_constellation.scale*(-sin(current_constellation.theta) * dx + cos(current_constellation.theta) * dy);
-	current_state.phi = -current_constellation.theta + PI;
+	current_state.x = current_constellation.scale*(cos(current_constellation.theta) * dx - sin(current_constellation.theta) * dy);
+	current_state.y = current_constellation.scale*(sin(current_constellation.theta) * dx + cos(current_constellation.theta) * dy);
+	current_state.phi = -current_constellation.theta + PI + MWII_ANGLE_OFFSET;
 
 	return current_state;
 }
