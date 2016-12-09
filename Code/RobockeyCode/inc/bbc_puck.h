@@ -1,7 +1,7 @@
 /* File: bbc_puck.h
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu>, Cameron Zawacki,
- *		    Ben Bernstein
+ *		    Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Code for finding puck direction and sensing puck possesion
  */

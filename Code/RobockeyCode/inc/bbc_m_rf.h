@@ -1,7 +1,7 @@
 /* File: bbc_m_rf.h
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu>, Cameron Zawacki,
- *		    Ben Bernstein
+ *		    Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Code for initializing mWii and getting the message sent over
  * wireless.

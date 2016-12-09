@@ -1,7 +1,7 @@
 /* File: bbc_m_usb.c
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Printing routines for robockey.
  */
@@ -145,9 +145,9 @@ void print_localize(loc_state current) {
 void print_motor_duty(float duty_l, float duty_r) {
 #ifdef DEBUG_USB
 	m_usb_tx_string("\nMotor duty (x100) - left: ");
-	m_usb_tx_int((int) duty_l * 100);
+	m_usb_tx_int((int) (duty_l * 100));
 	m_usb_tx_string(" right: ");
-	m_usb_tx_int((int) duty_r * 100);
+	m_usb_tx_int((int) (duty_r * 100));
 #endif
 }
 

@@ -1,7 +1,7 @@
 /* File: bbc_localize.c
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Localization code
  */
@@ -355,7 +355,7 @@ loc_state localize() {
 	} else if (valid_sum == 4) {
 		current_constellation = four_stars(good_x, good_y);
 	}
-	// print_constellation(current_constellation, current_state);
+	// print_constellation(current_constellation);
 
 	// Convert pixel image to actual coordinates
 	// Shift by half of image dimensions to center the origin
@@ -364,7 +364,10 @@ loc_state localize() {
 
 	current_state.x = current_constellation.scale*(cos(current_constellation.theta) * dx - sin(current_constellation.theta) * dy);
 	current_state.y = current_constellation.scale*(sin(current_constellation.theta) * dx + cos(current_constellation.theta) * dy);
-	current_state.phi = -current_constellation.theta + PI + MWII_ANGLE_OFFSET;
+	current_state.phi = -current_constellation.theta + MWII_ANGLE_OFFSET;
+	if (current_state.phi < -PI) {
+		current_state.phi = current_state.phi + 2*PI;
+	}
 
 	return current_state;
 }

@@ -1,7 +1,7 @@
 /* File: bbc_localize.h
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Localization code
  */

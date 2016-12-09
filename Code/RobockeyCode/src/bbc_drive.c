@@ -1,7 +1,7 @@
 /* File: bbc_drive.c
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Drive controllers 
  */
@@ -109,5 +109,5 @@ void set_motor_speeds(float ml, float mr) {
 	set_left_duty(ml);
 	set_right_duty(mr);
 
-	// print_motor_duty(left_duty, right_duty);
+	// print_motor_duty(ml, mr);
 }

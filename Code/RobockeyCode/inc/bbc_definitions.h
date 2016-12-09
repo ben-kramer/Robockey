@@ -1,7 +1,7 @@
 /* File: bbc_definitions.h
  *
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * All defines used within the robockey program.
  */
@@ -40,7 +40,7 @@ enum adc_pin_index {
 #define STRAIGHT_IR_THRESH		950 
 #define ADC_MAX 1024.0
 #define ADC_MIN 0.0
-#define INTENSITY_SUM_THRESH 	0.1f
+#define INTENSITY_SUM_THRESH 	0.1
 
 // mWii definitions
 
@@ -52,9 +52,9 @@ enum adc_pin_index {
  * ========================================================================== */
 
 #define GOALIE_X_THRESH			90
-#define GOALIE_DIST_THRESH		0.5f
+#define GOALIE_DIST_THRESH		0.5
 
 #define DRIVE_SPEED				0.8f
-#define SPIN_DIFF				0.1f
+#define SPIN_DIFF				0.1
 
 #endif

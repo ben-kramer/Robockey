@@ -3,13 +3,13 @@
 /* Things to check
 
 	Localization
-			Good mWii readings
-			Angle == 0 when bot is facing blackboard
-			Angle goes from -Pi to PI in radians clockwise
-			X = 0, Y = 0 is center of the rink
-			X < 0 is towards the door of Wu and Chen
-			Y < 0 is towards the seats of Wu and Chen
-			Max x is around 115 cm, max y is around 60 cm
+		x	Good mWii readings
+		x	Angle == 0 when bot is facing blackboard
+		x	Angle goes from -Pi to PI in radians clockwise
+		x	X = 0, Y = 0 is center of the rink
+		x	X < 0 is towards the door of Wu and Chen
+		x	Y < 0 is towards the seats of Wu and Chen
+		x	Max x is around 115 cm, max y is around 60 cm
 
 	Puck-finding
 		Good ADC data reading and writing
@@ -121,12 +121,11 @@ int main(void)
 		}
 
 		if (play_mode) {
-			// m_green(ON); // Playing
+			m_green(ON); // Playing
 			determine_strategy(goalie, goal_to_defend);
 		} else {
-			// m_green(OFF);
-			// Stop motors
-			set_motor_speeds(0.5, 0.5);
+			m_green(OFF);
+			set_motor_speeds(0.5, 0.5); // Stop motors
 		}
 
 		if (qualify) {qualify_mode();}

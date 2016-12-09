@@ -1,7 +1,7 @@
 /* File: bbc_adc.c
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Code to initialize the ADC and read/record data.
  */

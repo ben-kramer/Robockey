@@ -1,7 +1,7 @@
 /* File: bbc_m_usb.h
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Printing routines for robockey.
  */

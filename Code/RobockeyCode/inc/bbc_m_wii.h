@@ -1,7 +1,7 @@
 /* File: bbc_m_wii.h
  * 
  * Authors: Ben Kramer <krab@seas.upenn.edu> Cameron Zawacki,
- *          Ben Bernstein
+ *          Ben Bernstein <bernsb@seas.upenn.edu>
  *
  * Code to initialize and read data from mWii.
  */
